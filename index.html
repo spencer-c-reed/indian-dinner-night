@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#7a8e5f">
+<title>Indian Dinner Night — Samosas, Matar Kachori, Jeera Rice & Bhindi</title>
+<style>
+  :root{
+    --sage:#7a8e5f; --sage-dark:#5f7049; --sage-light:#e9efe0;
+    --cream:#fdfaf3; --cream-2:#f4eee1; --card:#ffffff;
+    --ink:#2c2a26; --ink-soft:#5b574e; --line:#e2dccc;
+    --amber:#b8852a; --amber-bg:#fdf4e3; --chili:#a8442f;
+    --shadow:0 1px 3px rgba(44,42,38,.08),0 6px 20px rgba(44,42,38,.06);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--cream); color:var(--ink);
+    font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-text-size-adjust:100%;
+  }
+  h1,h2,h3{font-family:Georgia,"Times New Roman",serif; line-height:1.2; letter-spacing:-.01em}
+  a{color:var(--sage-dark)}
+
+  /* ---------- header ---------- */
+  header.hero{
+    background:linear-gradient(160deg,var(--sage) 0%,var(--sage-dark) 100%);
+    color:#fff; padding:34px 20px 26px;
+  }
+  .hero .kicker{text-transform:uppercase; letter-spacing:.18em; font-size:12px; opacity:.85; margin:0 0 8px}
+  .hero h1{margin:0 0 10px; font-size:30px}
+  .hero p{margin:0; max-width:60ch; opacity:.95; font-size:15.5px}
+  .hero .meta{margin-top:16px; display:flex; flex-wrap:wrap; gap:8px}
+  .hero .meta span{background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.25);
+    padding:5px 11px; border-radius:999px; font-size:13px; white-space:nowrap}
+
+  /* ---------- sticky nav ---------- */
+  nav.jump{position:sticky; top:0; z-index:50; background:rgba(253,250,243,.96);
+    backdrop-filter:blur(8px); border-bottom:1px solid var(--line);
+    overflow-x:auto; -webkit-overflow-scrolling:touch; white-space:nowrap; padding:10px 14px}
+  nav.jump a{display:inline-block; text-decoration:none; color:var(--ink-soft);
+    font-size:13.5px; font-weight:600; padding:6px 12px; margin-right:6px;
+    border:1px solid var(--line); border-radius:999px; background:var(--card)}
+  nav.jump a:active{background:var(--sage-light)}
+
+  /* ---------- layout ---------- */
+  main{max-width:880px; margin:0 auto; padding:18px 16px 90px}
+  section{margin:26px 0; scroll-margin-top:64px}
+  h2.section-title{font-size:23px; margin:0 0 4px; color:var(--sage-dark);
+    display:flex; align-items:center; gap:10px}
+  h2.section-title .num{flex:0 0 auto; width:30px; height:30px; border-radius:50%;
+    background:var(--sage); color:#fff; font-family:inherit; font-size:15px;
+    display:inline-flex; align-items:center; justify-content:center}
+  .sub{color:var(--ink-soft); font-size:14px; margin:2px 0 0 40px}
+
+  .card{background:var(--card); border:1px solid var(--line); border-radius:16px;
+    padding:18px 18px 6px; box-shadow:var(--shadow); margin-top:14px}
+  .recipe-head{display:flex; flex-wrap:wrap; gap:8px 14px; align-items:baseline; margin-bottom:6px}
+  .recipe-head .stat{font-size:13px; color:var(--ink-soft)}
+  .recipe-head .stat b{color:var(--ink)}
+
+  /* ---------- ingredient pills ---------- */
+  .amt{display:inline; font-weight:700; color:var(--sage-dark);
+    background:var(--sage-light); border-radius:6px; padding:1px 6px; white-space:nowrap}
+  ul.ing{list-style:none; padding:0; margin:6px 0 14px; columns:2; column-gap:22px}
+  ul.ing li{break-inside:avoid; padding:5px 0; border-bottom:1px dotted var(--line); font-size:14.5px}
+  ul.ing li .opt{color:var(--ink-soft); font-style:italic; font-size:12.5px}
+
+  /* ---------- steps ---------- */
+  ol.steps{counter-reset:step; list-style:none; padding:0; margin:8px 0 16px}
+  ol.steps li{position:relative; padding:2px 0 16px 42px; counter-increment:step}
+  ol.steps li::before{content:counter(step); position:absolute; left:0; top:0;
+    width:28px; height:28px; background:var(--cream-2); color:var(--sage-dark);
+    border:1px solid var(--line); border-radius:50%; font-weight:700; font-size:14px;
+    display:flex; align-items:center; justify-content:center}
+  ol.steps li.lead::before{background:var(--sage); color:#fff; border-color:var(--sage)}
+  .phase{font-size:11.5px; text-transform:uppercase; letter-spacing:.12em;
+    color:var(--amber); font-weight:700; display:block; margin-bottom:2px}
+
+  /* ---------- tip / callout boxes ---------- */
+  aside.tip{background:var(--amber-bg); border:1px solid #efdcb4; border-left:4px solid var(--amber);
+    border-radius:10px; padding:12px 14px; margin:12px 0; font-size:14px}
+  aside.tip h4{margin:0 0 5px; font-family:inherit; font-size:13px; text-transform:uppercase;
+    letter-spacing:.08em; color:var(--amber)}
+  aside.key{background:#eef3fb; border-color:#cfe0f5; border-left-color:#3d6cb0}
+  aside.key h4{color:#3d6cb0}
+  aside.tip ul{margin:6px 0 0; padding-left:18px}
+  aside.tip li{margin:3px 0}
+
+  /* ---------- timeline ---------- */
+  .timeline{position:relative; margin:14px 0 0; padding-left:8px}
+  .tl{position:relative; padding:0 0 18px 56px; border-left:2px solid var(--sage-light); margin-left:46px}
+  .tl:last-child{border-left-color:transparent}
+  .tl .time{position:absolute; left:-46px; top:-2px; width:84px; text-align:right;
+    font-weight:700; font-size:13px; color:var(--sage-dark)}
+  .tl::before{content:""; position:absolute; left:-7px; top:3px; width:12px; height:12px;
+    background:var(--sage); border:2px solid var(--cream); border-radius:50%}
+  .tl.depart::before{background:var(--chili)}
+  .tl.home::before{background:var(--amber)}
+  .tl .what{font-size:14.5px}
+  .tl .what b{color:var(--ink)}
+
+  /* ---------- checklist ---------- */
+  ul.check{list-style:none; padding:0; margin:8px 0}
+  ul.check li{padding:8px 0 8px 32px; position:relative; border-bottom:1px solid var(--line); font-size:15px}
+  ul.check li::before{content:"○"; position:absolute; left:4px; top:7px; color:var(--sage); font-size:18px}
+
+  .status-grid{display:grid; grid-template-columns:1fr; gap:10px; margin-top:8px}
+  .status-grid .box{border:1px solid var(--line); border-radius:12px; padding:12px 14px; background:var(--card)}
+  .status-grid .box h4{margin:0 0 6px; font-family:inherit; font-size:13px; letter-spacing:.04em}
+  .status-grid .have h4{color:var(--sage-dark)} .status-grid .need h4{color:var(--chili)}
+  .status-grid p{margin:0; font-size:14px; color:var(--ink-soft)}
+
+  .totop{position:fixed; right:16px; bottom:16px; z-index:60; background:var(--sage); color:#fff;
+    text-decoration:none; width:46px; height:46px; border-radius:50%; box-shadow:var(--shadow);
+    display:flex; align-items:center; justify-content:center; font-size:20px}
+
+  footer{max-width:880px; margin:0 auto; padding:18px 16px 40px; color:var(--ink-soft); font-size:13px;
+    border-top:1px solid var(--line)}
+
+  /* ---------- desktop ---------- */
+  @media(min-width:760px){
+    .hero h1{font-size:38px}
+    .status-grid{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:520px){
+    ul.ing{columns:1}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <p class="kicker">Wednesday dinner · built around a JFK pickup</p>
+  <h1>Indian Dinner Night</h1>
+  <p>Khasta samosas, matar ki kachori, jeera rice and dry-fried bhindi — engineered so everything is hot and fresh when Savannah walks in, with a clean break to drive to the airport in the middle.</p>
+  <div class="meta">
+    <span>🥔 5 lb potatoes pre-boiled</span>
+    <span>🍳 Deep fryer</span>
+    <span>🍚 Rice cooker</span>
+    <span>🧊 Ninja Slushi</span>
+    <span>✈️ ~9:30 PM JFK</span>
+  </div>
+</header>
+
+<nav class="jump" aria-label="Jump to section">
+  <a href="#plan">The Plan</a>
+  <a href="#timeline">Timeline</a>
+  <a href="#dough">Dough</a>
+  <a href="#samosa">Samosas</a>
+  <a href="#kachori">Kachori</a>
+  <a href="#rice">Jeera Rice</a>
+  <a href="#bhindi">Bhindi</a>
+  <a href="#slushi">Slushi</a>
+  <a href="#finish">Final Push</a>
+</nav>
+
+<main>
+
+  <!-- THE PLAN -->
+  <section id="plan">
+    <h2 class="section-title"><span class="num">i</span>The Plan</h2>
+    <p class="sub">Why this works and what to grab before you start.</p>
+
+    <aside class="tip key">
+      <h4>The one idea that makes this work</h4>
+      <p style="margin:0">Samosas <em>and</em> kachori use a <b>two-stage fry</b>: a long, slow fry at <span class="amt">275°F</span> sets a pale, blistered shell, then a quick fry at <span class="amt">350°F</span> finishes them deep golden. The slow fry can happen <b>before you leave</b>; the 2–3 minute finish happens <b>when you get home</b>. That split is your airport break — par-fry early, finish to order, serve hot. Jeera rice and bhindi get the same treatment: bulk of the work ahead, fast finish on return.</p>
+    </aside>
+
+    <div class="status-grid">
+      <div class="box have">
+        <h4>✓ Already sorted</h4>
+        <p>Okra, frying oil, and <b>5 lb potatoes boiled &amp; chilled</b> (the big samosa make-ahead). Plus basmati, ghee, frozen peas, ajwain, amchur, coriander &amp; garam masala, chickpea flour, chilies powders, onions, tortillas.</p>
+      </div>
+      <div class="box need">
+        <h4>● Still to grab</h4>
+        <p><b>Fresh cilantro</b> (samosa filling + bhindi &amp; kachori garnish) and, if you want them, a few <b>fresh green chilies</b>. Everything else is in the larder.</p>
+      </div>
+    </div>
+
+    <aside class="tip">
+      <h4>Do this first</h4>
+      <p style="margin:0">Wash the okra and spread it on a towel to dry <b>now</b> — it needs to be bone dry before slicing or the bhindi turns slimy. It can air-dry while you make the dough.</p>
+    </aside>
+  </section>
+
+  <!-- TIMELINE -->
+  <section id="timeline">
+    <h2 class="section-title"><span class="num">ii</span>Master Timeline</h2>
+    <p class="sub">Working back from an 8:45 PM departure. Shift the clock to taste — the order is what matters.</p>
+    <div class="timeline">
+      <div class="tl"><span class="time">~3:00</span><div class="what"><b>Dough.</b> Make the <a href="#dough">master khasta dough</a>, cover, rest 45–60 min. Wash &amp; dry the okra if you haven't.</div></div>
+      <div class="tl"><span class="time">~3:15</span><div class="what"><b>Spices &amp; fillings.</b> While the dough rests: dry-roast the samosa spices; cook the <a href="#samosa">samosa filling</a> and the <a href="#kachori">matar kachori filling</a>. Cool both completely.</div></div>
+      <div class="tl"><span class="time">~4:30</span><div class="what"><b>Shape.</b> Shape the samosas (the long job) and the kachori. Keep tonight's tray out; freeze the rest shaped &amp; raw.</div></div>
+      <div class="tl"><span class="time">~7:30</span><div class="what"><b>Slow fry.</b> First fry tonight's samosas &amp; a few kachori at <span class="amt">275°F</span>. Cool on a rack — do <em>not</em> finish them yet.</div></div>
+      <div class="tl"><span class="time">~7:45</span><div class="what"><b>Rice on.</b> Start the <a href="#rice">jeera rice</a> in the cooker; leave it on warm.</div></div>
+      <div class="tl"><span class="time">~8:00</span><div class="what"><b>Bhindi 90%.</b> Cook the <a href="#bhindi">bhindi</a> through the spice toast, pull it slightly underdone, set aside.</div></div>
+      <div class="tl"><span class="time">~8:30</span><div class="what"><b>Slushi on.</b> Start the <a href="#slushi">cowboy colada</a> in the Ninja Slushi — it holds for hours.</div></div>
+      <div class="tl depart"><span class="time">8:45</span><div class="what"><b>Leave for JFK.</b> ~25 min free-flow / ~11 mi; budget 35–40 with the curbside wait.</div></div>
+      <div class="tl"><span class="time">~9:30</span><div class="what"><b>Pickup.</b> 🛬</div></div>
+      <div class="tl home"><span class="time">~10:15</span><div class="what"><b>Home.</b> Run the <a href="#finish">15-minute final push</a> — everything hot at once.</div></div>
+    </div>
+  </section>
+
+  <!-- DOUGH -->
+  <section id="dough">
+    <h2 class="section-title"><span class="num">1</span>Master Khasta Dough</h2>
+    <p class="sub">One stiff, ghee-rich dough feeds both the samosas and the kachori. Make it as a single batch and split it.</p>
+    <div class="card">
+      <div class="recipe-head">
+        <span class="stat"><b>Makes:</b> ~40–48 samosas + ~15 kachori</span>
+        <span class="stat"><b>Rest:</b> 45–60 min</span>
+      </div>
+      <ul class="ing">
+        <li><span class="amt">12 cups</span> all-purpose flour (1440g)</li>
+        <li><span class="amt">24 tbsp</span> ghee (1½ cups), room temp</li>
+        <li><span class="amt">4½ tsp</span> fine salt</li>
+        <li><span class="amt">3½ tsp</span> ajwain (carom) seeds</li>
+        <li><span class="amt">~3¼ cups</span> cold water</li>
+      </ul>
+      <ol class="steps">
+        <li class="lead">In a large bowl, stir together the <span class="amt">12 cups flour</span>, <span class="amt">4½ tsp salt</span> and <span class="amt">3½ tsp ajwain</span>.</li>
+        <li>Add the <span class="amt">24 tbsp ghee</span> and rub it in with both hands 3–4 min until the flour looks like coarse sand and clumps when squeezed.</li>
+        <li>Add the <span class="amt">~3¼ cups cold water</span> gradually, mixing into a <b>firm, stiff, non-sticky</b> dough — stop the moment it comes together. Knead 4 min until smooth.</li>
+        <li>Cover and rest <span class="amt">45–60 min</span>. Then split: about <b>¾ for samosas</b>, <b>¼ for kachori</b>.</li>
+      </ol>
+      <aside class="tip">
+        <h4>Why stiff</h4>
+        <p style="margin:0">Flakiness comes from a stiff, low-hydration dough plus the slow fry — not from extra fat. A wet or greasy dough won't seal and reads as oily. If you'd rather make them separately: samosa portion is <span class="amt">9 cups flour</span> / <span class="amt">18 tbsp ghee</span>; kachori portion is <span class="amt">3 cups flour</span> / <span class="amt">6 tbsp ghee</span>.</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- SAMOSA -->
+  <section id="samosa">
+    <h2 class="section-title"><span class="num">2</span>North Indian Halwai Samosas</h2>
+    <p class="sub">Flaky, blistered chaat-shop potato samosas. Potatoes are already boiled and chilled — that's the single biggest texture win, done.</p>
+    <div class="card">
+      <div class="recipe-head">
+        <span class="stat"><b>Yields:</b> ~40–48</span>
+        <span class="stat"><b>Filling:</b> ~30 min</span>
+        <span class="stat"><b>Fry:</b> two-stage, see step 8</span>
+      </div>
+      <ul class="ing">
+        <li>¾ of the <a href="#dough">master dough</a></li>
+        <li><span class="amt">5 lb</span> potatoes, boiled, chilled, peeled</li>
+        <li><span class="amt">6 tbsp</span> ghee (filling)</li>
+        <li><span class="amt">7 tsp</span> cumin seeds (3 roast in blend · 2 bhuna jeera · 2 temper)</li>
+        <li><span class="amt">4 tbsp</span> coriander seeds, dry-roasted</li>
+        <li><span class="amt">3 tsp</span> fennel seeds, dry-roasted</li>
+        <li><span class="amt">¼ tsp</span> asafoetida (hing)</li>
+        <li><span class="amt">¼ cup</span> minced fresh ginger</li>
+        <li><span class="amt">6</span> green chilies, finely chopped</li>
+        <li><span class="amt">2</span> medium onions, finely chopped <span class="opt">(optional — omit for purist halwai)</span></li>
+        <li><span class="amt">2 tsp</span> turmeric</li>
+        <li><span class="amt">2 tsp</span> Kashmiri red chili powder</li>
+        <li><span class="amt">1 tsp</span> hot red chili powder (lal mirch, not Kashmiri)</li>
+        <li><span class="amt">½ cup</span> raw cashews, crushed</li>
+        <li><span class="amt">1 tbsp</span> amchur</li>
+        <li><span class="amt">2 tsp</span> garam masala</li>
+        <li><span class="amt">1 tbsp</span> kasuri methi <span class="opt">(optional)</span></li>
+        <li><span class="amt">1 cup</span> cilantro, chopped</li>
+        <li><span class="amt">1</span> lemon, juice (reserved)</li>
+        <li><span class="amt">~2½ tsp</span> salt + <span class="amt">¾ tsp</span> black salt</li>
+        <li><span class="amt">3 tbsp</span> flour + <span class="amt">3 tbsp</span> water (seal paste)</li>
+        <li>Neutral oil, <span class="amt">3 inches</span> deep, to fry</li>
+      </ul>
+      <ol class="steps">
+        <li class="lead"><span class="phase">Spices</span>Dry-roast <span class="amt">4 tbsp coriander seeds</span>, <span class="amt">3 tsp fennel seeds</span> and <span class="amt">3 tsp cumin seeds</span> ~3 min until fragrant. Coarsely crush. Separately roast and finely grind <span class="amt">2 tsp cumin</span> as <em>bhuna jeera</em> — <b>reserve it</b> for step 4. (The last <span class="amt">2 tsp cumin</span> is for tempering in step 3.)</li>
+        <li><span class="phase">Prep</span>Crumble the chilled potatoes into ½-inch chunks (don't mash). Mince <span class="amt">¼ cup ginger</span>, chop <span class="amt">6 green chilies</span> and <span class="amt">2 onions</span>, crush <span class="amt">½ cup cashews</span>, chop <span class="amt">1 cup cilantro</span>.</li>
+        <li><span class="phase">Cook filling</span>Heat <span class="amt">6 tbsp ghee</span>; add <span class="amt">2 tsp cumin seeds</span>, 30 sec, then <span class="amt">¼ tsp hing</span>, the ginger and chilies, 1 min. Add the onions, cook 6–8 min to drive off moisture. Lower heat; add <span class="amt">2 tsp turmeric</span>, <span class="amt">2 tsp Kashmiri</span> + <span class="amt">1 tsp hot (lal mirch)</span> chili and the crushed seed blend; toast 60 sec.</li>
+        <li>Fold in the potatoes, <span class="amt">½ cup cashews</span>, <span class="amt">~2½ tsp salt</span> and <span class="amt">¾ tsp black salt</span>, 4 min. Add <span class="amt">1 tbsp amchur</span>, <span class="amt">2 tsp garam masala</span> and <span class="amt">1 tbsp kasuri methi</span>, 1–2 min. Off heat stir in <span class="amt">1 cup cilantro</span>, the <b>reserved bhuna jeera</b>, and the juice of <span class="amt">1 lemon</span>. Taste — punchy, tangy, sulfur note from the black salt. Cool completely.</li>
+        <li><span class="phase">Seal glue</span>Mix <span class="amt">3 tbsp flour</span> with <span class="amt">3 tbsp water</span> into a thick paste — it grips far better than plain water.</li>
+        <li><span class="phase">Shape</span>Roll a dough ball into a 6–7" oval, ~2mm thick; cut in half. Brush the straight edge with paste, fold into a cone overlapping ¼", press the seam. Fill with <span class="amt">2–3 tbsp</span> filling, brush the rim, pinch closed with no gaps. Stand upright under a damp towel.</li>
+        <li><span class="phase">Hold</span>For tonight: keep one tray to fry; freeze the rest shaped &amp; raw on a tray, then bag. Fry from frozen later, adding 3–4 min to the <span class="amt">275°F</span> slow fry.</li>
+        <li><span class="phase">Two-stage fry</span><b>Now (before JFK):</b> heat oil to <span class="amt">275°F</span> and fry tonight's batch low and slow <span class="amt">18–22 min</span> — barely bubbling, crust pale and blistered. Cool on a rack. <b>Later (back home):</b> raise oil to <span class="amt">350°F</span> and finish <span class="amt">2–3 min</span> to deep golden.</li>
+      </ol>
+      <aside class="tip">
+        <h4>Notes</h4>
+        <ul>
+          <li>Cooking the onions down is what keeps the filling dry so the seal doesn't steam open.</li>
+          <li>Don't second-fry all 48 — finish only what you'll eat; the freezer batch is next week's dinner.</li>
+          <li>Council: Jaffrey-approved — ajwain crust, dry-roasted whole spices, hing, bhuna jeera, kasuri methi, two-stage khasta fry. Finishing acid (amchur + lemon) locked.</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <!-- KACHORI -->
+  <section id="kachori">
+    <h2 class="section-title"><span class="num">3</span>Matar ki Kachori</h2>
+    <p class="sub">Flaky fried pastry stuffed with a dry, spiced crushed-pea filling. Same dough, same fry as the samosas — they batch together.</p>
+    <div class="card">
+      <div class="recipe-head">
+        <span class="stat"><b>Yields:</b> ~15</span>
+        <span class="stat"><b>Filling:</b> ~20 min</span>
+        <span class="stat"><b>Fry:</b> two-stage</span>
+      </div>
+      <ul class="ing">
+        <li>¼ of the <a href="#dough">master dough</a></li>
+        <li><span class="amt">2 cups</span> green peas, thawed, coarsely crushed</li>
+        <li><span class="amt">2 tbsp</span> ghee (filling)</li>
+        <li><span class="amt">1 tsp</span> cumin seeds</li>
+        <li><span class="amt">1 pinch</span> asafoetida (hing)</li>
+        <li><span class="amt">1 tbsp</span> minced ginger</li>
+        <li><span class="amt">2</span> green chilies, minced</li>
+        <li><span class="amt">2 tbsp</span> besan (chickpea flour)</li>
+        <li><span class="amt">1 tsp</span> coriander powder</li>
+        <li><span class="amt">1 tsp</span> fennel seeds, ground</li>
+        <li><span class="amt">½ tsp</span> ground cumin</li>
+        <li><span class="amt">½ tsp</span> Kashmiri red chili powder</li>
+        <li><span class="amt">¾ tsp</span> salt</li>
+        <li><span class="amt">¾ tsp</span> amchur</li>
+        <li><span class="amt">½ tsp</span> garam masala</li>
+        <li><span class="amt">¼ tsp</span> sugar</li>
+        <li><span class="amt">2 tbsp</span> cilantro, chopped</li>
+        <li>Neutral oil, <span class="amt">3 inches</span> deep, to fry</li>
+      </ul>
+      <ol class="steps">
+        <li class="lead"><span class="phase">Filling</span>Heat <span class="amt">2 tbsp ghee</span>; add <span class="amt">1 tsp cumin seeds</span> + <span class="amt">1 pinch hing</span>, 30 sec. Add <span class="amt">1 tbsp ginger</span> and <span class="amt">2 minced chilies</span>, 1 min.</li>
+        <li>Add <span class="amt">2 tbsp besan</span> and toast 2 min until nutty — this binds the filling and soaks up pea moisture so the kachori won't burst.</li>
+        <li>Add the <span class="amt">2 cups crushed peas</span>, <span class="amt">1 tsp coriander</span>, <span class="amt">1 tsp ground fennel</span>, <span class="amt">½ tsp cumin</span>, <span class="amt">½ tsp Kashmiri chili</span> and <span class="amt">¾ tsp salt</span>. Cook on medium 8–10 min until <b>dry</b> and holding together.</li>
+        <li>Off heat, stir in <span class="amt">¾ tsp amchur</span>, <span class="amt">½ tsp garam masala</span>, <span class="amt">¼ tsp sugar</span> and <span class="amt">2 tbsp cilantro</span>. Cool completely.</li>
+        <li><span class="phase">Shape</span>Divide the dough into ~15 balls. Cup each into a 3" disc thicker at the center, fill with <span class="amt">~1 tbsp</span> filling, pleat closed, and gently flatten to a 2½–3" disc with no cracks.</li>
+        <li><span class="phase">Two-stage fry</span>Same as the samosas: <span class="amt">275°F</span> low fry <span class="amt">12–15 min</span> until pale and puffed, then <span class="amt">350°F</span> for <span class="amt">2–3 min</span> to deep golden. Par-fry a few tonight alongside the samosas; refrigerate or freeze the rest.</li>
+      </ol>
+      <aside class="tip">
+        <h4>Make it "later" or "some tonight"</h4>
+        <p style="margin:0">Filling keeps 3–4 days refrigerated; shaped raw kachori refrigerate 1–2 days or freeze. For a taste tonight, par-fry 3–4 with the samosas and finish them in the same <span class="amt">350°F</span> pass when you get home.</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- RICE -->
+  <section id="rice">
+    <h2 class="section-title"><span class="num">4</span>Jeera Rice</h2>
+    <p class="sub">Rice cooker does the work; a finishing tadka gives it the toasted-cumin perfume. Your variation adds garam masala + black pepper.</p>
+    <div class="card">
+      <div class="recipe-head">
+        <span class="stat"><b>Serves:</b> 4</span>
+        <span class="stat"><b>Active:</b> ~5 min</span>
+      </div>
+      <ul class="ing">
+        <li><span class="amt">1½ cups</span> basmati rice</li>
+        <li><span class="amt">2¼ cups</span> water</li>
+        <li><span class="amt">1 tsp</span> salt + more to taste</li>
+        <li><span class="amt">1</span> bay leaf</li>
+        <li><span class="amt">2 tbsp</span> ghee (tadka)</li>
+        <li><span class="amt">1 tsp</span> cumin seeds (tadka)</li>
+        <li><span class="amt">½ tsp</span> garam masala</li>
+        <li><span class="amt">¼ tsp</span> finely ground black pepper</li>
+      </ul>
+      <ol class="steps">
+        <li class="lead">Rinse <span class="amt">1½ cups basmati</span> until the water runs mostly clear. Add to the cooker with <span class="amt">2¼ cups water</span>, <span class="amt">1 tsp salt</span> and <span class="amt">1 bay leaf</span>. Start it; leave on warm when done.</li>
+        <li><span class="phase">Finish on return</span>Melt <span class="amt">2 tbsp ghee</span>, add <span class="amt">1 tsp cumin seeds</span>, sizzle 30–60 sec. Off heat stir in <span class="amt">½ tsp garam masala</span> + <span class="amt">¼ tsp black pepper</span>. Pour over the rice, pull the bay leaf, fluff. Taste and add <span class="amt">¼–½ tsp salt</span> as needed.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- BHINDI -->
+  <section id="bhindi">
+    <h2 class="section-title"><span class="num">5</span>Dry-Fried Bhindi</h2>
+    <p class="sub">Okra dry-fried uncovered until the slime's gone and the edges crisp, finished with garam masala off the heat. The one okra dish that survives a hold.</p>
+    <div class="card">
+      <div class="recipe-head">
+        <span class="stat"><b>Serves:</b> 2–3</span>
+        <span class="stat"><b>Cook:</b> ~25 min</span>
+      </div>
+      <ul class="ing">
+        <li><span class="amt">1 lb</span> okra, dried, ½" rounds</li>
+        <li><span class="amt">3 tbsp</span> neutral oil <span class="opt">(or 2 tbsp neutral + 1 tbsp mustard oil)</span></li>
+        <li><span class="amt">1 tsp</span> cumin seeds</li>
+        <li><span class="amt">1 pinch</span> asafoetida (hing)</li>
+        <li><span class="amt">1</span> medium yellow onion, thinly sliced <span class="opt">(optional)</span></li>
+        <li><span class="amt">2</span> green chilies, slit</li>
+        <li><span class="amt">½ tsp</span> turmeric</li>
+        <li><span class="amt">1 tsp</span> coriander powder</li>
+        <li><span class="amt">¾ tsp</span> Kashmiri red chili powder</li>
+        <li><span class="amt">¾ tsp</span> amchur</li>
+        <li><span class="amt">¾ tsp</span> garam masala</li>
+        <li><span class="amt">¾ tsp</span> salt (added late)</li>
+        <li><span class="amt">½</span> lemon, juice</li>
+        <li><span class="amt">2 tbsp</span> cilantro, chopped</li>
+        <li><span class="amt">1 pinch</span> chaat masala <span class="opt">(optional)</span></li>
+      </ul>
+      <ol class="steps">
+        <li class="lead"><span class="phase">Prep ahead</span>Wash <span class="amt">1 lb okra</span> and dry it <b>completely</b> (towel, 1–2 hrs). Trim caps, slice into <span class="amt">½"</span> rounds. Wet okra is the only reason bhindi goes slimy.</li>
+        <li>Heat <span class="amt">3 tbsp oil</span> over medium-high until shimmering. Add <span class="amt">1 tsp cumin seeds</span> + <span class="amt">1 pinch hing</span>, 30 sec.</li>
+        <li>Add the okra in a near-single layer. <b>Don't stir 3–4 min</b> — let it sear. Then stir occasionally, <b>uncovered</b>, 12–15 min until the slime's gone and the edges brown. Never cover.</li>
+        <li>Push aside; add <span class="amt">1 sliced onion</span> + <span class="amt">2 slit chilies</span>, 3–4 min.</li>
+        <li>Lower to medium; add <span class="amt">½ tsp turmeric</span>, <span class="amt">1 tsp coriander</span>, <span class="amt">¾ tsp Kashmiri chili</span>, toss 60 sec.</li>
+        <li>Add <span class="amt">¾ tsp salt</span> (now, so it doesn't draw moisture) and <span class="amt">¾ tsp amchur</span>, 1–2 min.</li>
+        <li>Off heat: <span class="amt">¾ tsp garam masala</span>, juice of <span class="amt">½ lemon</span>, <span class="amt">2 tbsp cilantro</span> (+ optional <span class="amt">pinch chaat masala</span>). Taste — tangy, toasty, crisp-edged.</li>
+      </ol>
+      <aside class="tip">
+        <h4>Tonight's hold</h4>
+        <p style="margin:0">Cook through <b>step 5</b> (the spice toast) before you leave, slightly underdone. On return, re-crisp in a screaming-hot pan 4–5 min, then do <b>step 6</b> (<span class="amt">¾ tsp salt</span> + <span class="amt">¾ tsp amchur</span>) and <b>step 7</b> (off-heat <span class="amt">¾ tsp garam masala</span>, lemon, cilantro) fresh. Because it's dry, it re-crisps instead of going mushy.</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- SLUSHI -->
+  <section id="slushi">
+    <h2 class="section-title"><span class="num">6</span>Cowboy Colada · Ninja Slushi</h2>
+    <p class="sub">The welcome-home drink. Start it before you leave; it freezes in 15–60 min and holds slush for hours.</p>
+    <div class="card">
+      <aside class="tip" style="margin-top:0">
+        <h4>The mix</h4>
+        <p style="margin:0">Your cowboy colada — coconut cream + pineapple base, spiked to taste. Keep the <b>total</b> under <span class="amt">~2.5% ABV</span> so it actually freezes (rough guide: no more than ~½ cup spirit per full pitcher of mix).</p>
+      </aside>
+      <ol class="steps">
+        <li class="lead">Load and start the Slushi <b>~8:30</b>, before the airport run. It freezes in 15–60 min and holds slush for hours, so it'll be perfect when you walk back in.</li>
+        <li>If it's staying liquidy, it's too boozy — cut it with more colada base or juice to drop the ABV and it'll catch.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- FINAL PUSH -->
+  <section id="finish">
+    <h2 class="section-title"><span class="num">7</span>The 15-Minute Final Push</h2>
+    <p class="sub">When you're home (~10:15). One short burst and everything lands hot together.</p>
+    <div class="card">
+      <ul class="check">
+        <li>Turn the fryer / oil up to <span class="amt">350°F</span>.</li>
+        <li>While it heats: bhindi pan on high — re-crisp 4–5 min, add <span class="amt">¾ tsp salt</span> + <span class="amt">¾ tsp amchur</span>, then off heat finish with <span class="amt">¾ tsp garam masala</span>, juice of <span class="amt">½ lemon</span> and <span class="amt">2 tbsp cilantro</span>.</li>
+        <li>Rice tadka: <span class="amt">2 tbsp ghee</span> + <span class="amt">1 tsp cumin</span>, then <span class="amt">½ tsp garam masala</span> + <span class="amt">¼ tsp black pepper</span> — pour over and fluff.</li>
+        <li>When the oil hits <span class="amt">350°F</span>: second-fry the par-fried samosas &amp; kachori <span class="amt">2–3 min</span>, drain on a rack.</li>
+        <li>Pour the cowboy colada. Plate everything with tamarind-mint chutney or yogurt. Eat.</li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<a href="#" class="totop" aria-label="Back to top">↑</a>
+
+<footer>
+  Built for one specific Wednesday. Samosa, bhindi and matar kachori recipes are saved in serve-yourself. Drive time: ~25 min free-flow, Bed-Stuy → JFK. Cook honest — the timings here are the real floors.
+</footer>
+
+</body>
+</html>
