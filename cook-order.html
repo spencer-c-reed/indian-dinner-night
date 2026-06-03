@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#7a8e5f">
+<title>Cook Order — Indian Dinner Night</title>
+<style>
+  :root{
+    --sage:#7a8e5f; --sage-dark:#5f7049;
+    --cream:#fdfaf3; --cream-2:#f4eee1; --card:#ffffff;
+    --ink:#2c2a26; --ink-soft:#5b574e; --line:#e2dccc;
+    --shadow:0 1px 3px rgba(44,42,38,.08),0 6px 20px rgba(44,42,38,.06);
+    /* recipe colors */
+    --c-prep:#8a8f98; --c-dough:#9c6b3f; --c-samosa:#6b8e3d; --c-kachori:#c8791f;
+    --c-rice:#c9a227; --c-bhindi:#2f8f6f; --c-slushi:#3f7fd0; --c-all:#a8442f;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--cream);color:var(--ink);
+    font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-text-size-adjust:100%}
+  h1,h2{font-family:Georgia,"Times New Roman",serif;line-height:1.2;letter-spacing:-.01em}
+  a{color:var(--sage-dark)}
+  .amt{display:inline;font-weight:700;color:var(--sage-dark);background:#eef2e6;
+    border-radius:6px;padding:1px 6px;white-space:nowrap}
+
+  header.hero{background:linear-gradient(160deg,var(--sage) 0%,var(--sage-dark) 100%);
+    color:#fff;padding:28px 20px 22px}
+  header .back{color:rgba(255,255,255,.9);text-decoration:none;font-size:13px;font-weight:600}
+  header h1{margin:8px 0 6px;font-size:27px}
+  header p{margin:0;opacity:.95;font-size:14.5px;max-width:60ch}
+
+  /* legend */
+  .legend{position:sticky;top:0;z-index:40;background:rgba(253,250,243,.96);
+    backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    padding:10px 12px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+  .legend .chip{font-size:11.5px;font-weight:700;color:#fff;padding:4px 10px;border-radius:999px;white-space:nowrap}
+
+  main{max-width:780px;margin:0 auto;padding:8px 14px 80px}
+
+  .block{margin:22px 0 0}
+  .block .blockhead{display:flex;align-items:center;gap:10px;margin:0 0 4px}
+  .block .clock{font-family:Georgia,serif;font-size:22px;color:var(--sage-dark);font-weight:700}
+  .block .label{font-size:12.5px;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-soft);font-weight:700}
+  .block .note{font-size:13px;color:var(--ink-soft);margin:0 0 8px}
+
+  ol.steps{list-style:none;counter-reset:s;padding:0;margin:6px 0 0}
+  ol.steps li{counter-increment:s;position:relative;background:var(--card);
+    border:1px solid var(--line);border-left-width:5px;border-radius:12px;
+    padding:11px 13px 11px 13px;margin:8px 0;box-shadow:var(--shadow)}
+  ol.steps li .tag{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.05em;
+    text-transform:uppercase;color:#fff;padding:2px 8px;border-radius:999px;margin-bottom:5px}
+  ol.steps li .body{font-size:14.5px}
+  ol.steps li .n{color:var(--ink-soft);font-weight:700;font-size:12px;margin-right:6px}
+
+  /* per-recipe accents */
+  .r-prep{border-left-color:var(--c-prep)} .r-prep .tag{background:var(--c-prep)}
+  .r-dough{border-left-color:var(--c-dough)} .r-dough .tag{background:var(--c-dough)}
+  .r-samosa{border-left-color:var(--c-samosa)} .r-samosa .tag{background:var(--c-samosa)}
+  .r-kachori{border-left-color:var(--c-kachori)} .r-kachori .tag{background:var(--c-kachori)}
+  .r-rice{border-left-color:var(--c-rice)} .r-rice .tag{background:var(--c-rice)}
+  .r-bhindi{border-left-color:var(--c-bhindi)} .r-bhindi .tag{background:var(--c-bhindi)}
+  .r-slushi{border-left-color:var(--c-slushi)} .r-slushi .tag{background:var(--c-slushi)}
+  .r-all{border-left-color:var(--c-all)} .r-all .tag{background:var(--c-all)}
+
+  .depart{background:#fbeae6;border:1px solid #f0c5ba;border-left:5px solid var(--c-all);
+    border-radius:12px;padding:13px 14px;margin:10px 0;font-size:15px}
+  .depart b{color:var(--c-all)}
+
+  .totop{position:fixed;right:16px;bottom:16px;z-index:60;background:var(--sage);color:#fff;
+    text-decoration:none;width:46px;height:46px;border-radius:50%;box-shadow:var(--shadow);
+    display:flex;align-items:center;justify-content:center;font-size:20px}
+  footer{max-width:780px;margin:0 auto;padding:18px 14px 40px;color:var(--ink-soft);font-size:13px;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <a class="back" href="index.html">← Back to the full plan</a>
+  <h1>Cook Order</h1>
+  <p>Every step from all six components, interleaved in the exact order you do them. The color stripe and tag tell you which dish each step belongs to.</p>
+</header>
+
+<div class="legend" aria-label="Color legend">
+  <span class="chip" style="background:var(--c-prep)">Prep</span>
+  <span class="chip" style="background:var(--c-dough)">Dough</span>
+  <span class="chip" style="background:var(--c-samosa)">Samosa</span>
+  <span class="chip" style="background:var(--c-kachori)">Kachori</span>
+  <span class="chip" style="background:var(--c-rice)">Rice</span>
+  <span class="chip" style="background:var(--c-bhindi)">Bhindi</span>
+  <span class="chip" style="background:var(--c-slushi)">Slushi</span>
+  <span class="chip" style="background:var(--c-all)">Finish</span>
+</div>
+
+<main>
+
+  <!-- AFTERNOON SETUP -->
+  <div class="block">
+    <div class="blockhead"><span class="clock">Now</span><span class="label">Setup</span></div>
+    <p class="note">Do these the moment you start — the okra needs hours to dry.</p>
+    <ol class="steps">
+      <li class="r-bhindi"><span class="tag">Bhindi</span><div class="body">Wash <span class="amt">1 lb okra</span> and spread it on a towel to dry <b>completely</b> (1–2 hrs). Bone-dry okra is the only way to avoid slime. Don't slice yet.</div></li>
+      <li class="r-prep"><span class="tag">Prep</span><div class="body">Grab <b>fresh cilantro</b> if you haven't (and a few fresh green chilies if you want them). Pull the chilled boiled potatoes out so they're handy.</div></li>
+    </ol>
+  </div>
+
+  <!-- ~3:00 DOUGH -->
+  <div class="block">
+    <div class="blockhead"><span class="clock">~3:00</span><span class="label">Dough</span></div>
+    <p class="note">Make it first so it can rest while you do everything else.</p>
+    <ol class="steps">
+      <li class="r-dough"><span class="tag">Dough</span><div class="body"><span class="n">D1</span>Stir together <span class="amt">12 cups flour</span>, <span class="amt">4½ tsp salt</span> and <span class="amt">3½ tsp ajwain</span>.</div></li>
+      <li class="r-dough"><span class="tag">Dough</span><div class="body"><span class="n">D2</span>Rub in <span class="amt">24 tbsp ghee</span> 3–4 min until it looks like coarse sand and clumps when squeezed.</div></li>
+      <li class="r-dough"><span class="tag">Dough</span><div class="body"><span class="n">D3</span>Add <span class="amt">~3¼ cups cold water</span> gradually into a firm, stiff, non-sticky dough; knead 4 min. Cover and rest <span class="amt">45–60 min</span>.</div></li>
+    </ol>
+  </div>
+
+  <!-- ~3:15 SPICES + FILLINGS (during rest) -->
+  <div class="block">
+    <div class="blockhead"><span class="clock">~3:15</span><span class="label">While the dough rests</span></div>
+    <p class="note">Roast spices and cook both fillings now. Both must cool completely before you fill.</p>
+    <ol class="steps">
+      <li class="r-samosa"><span class="tag">Samosa</span><div class="body"><span class="n">S1</span>Dry-roast <span class="amt">4 tbsp coriander seeds</span>, <span class="amt">3 tsp fennel</span> and <span class="amt">3 tsp cumin</span> ~3 min; coarsely crush. Separately roast &amp; grind <span class="amt">2 tsp cumin</span> as <em>bhuna jeera</em> — <b>set aside</b>. (Last <span class="amt">2 tsp cumin</span> is for tempering.)</div></li>
+      <li class="r-samosa"><span class="tag">Samosa</span><div class="body"><span class="n">S2</span>Crumble the chilled potatoes into ½" chunks. Mince <span class="amt">¼ cup ginger</span>; chop <span class="amt">6 green chilies</span> and <span class="amt">2 onions</span>; crush <span class="amt">½ cup cashews</span>; chop <span class="amt">1 cup cilantro</span>.</div></li>
+      <li class="r-samosa"><span class="tag">Samosa</span><div class="body"><span class="n">S3</span>Heat <span class="amt">6 tbsp ghee</span>; <span class="amt">2 tsp cumin</span> 30 sec, then <span class="amt">¼ tsp hing</span> + ginger + chilies 1 min. Onions 6–8 min. Lower heat; <span class="amt">2 tsp turmeric</span>, <span class="amt">2 tsp Kashmiri</span> + <span class="amt">1 tsp hot (lal mirch)</span> chili + crushed seed blend, 60 sec.</div></li>
+      <li class="r-samosa"><span class="tag">Samosa</span><div class="body"><span class="n">S4</span>Fold in potatoes, <span class="amt">½ cup cashews</span>, <span class="amt">~2½ tsp salt</span>, <span class="amt">¾ tsp black salt</span>, 4 min. Add <span class="amt">1 tbsp amchur</span>, <span class="amt">2 tsp garam masala</span>, <span class="amt">1 tbsp kasuri methi</span>, 1–2 min. Off heat: <span class="amt">1 cup cilantro</span>, the bhuna jeera, juice of <span class="amt">1 lemon</span>. Spread to cool.</div></li>
+      <li class="r-kachori"><span class="tag">Kachori</span><div class="body"><span class="n">K1</span>Thaw and coarsely crush <span class="amt">2 cups green peas</span> (textured, not paste).</div></li>
+      <li class="r-kachori"><span class="tag">Kachori</span><div class="body"><span class="n">K2</span>Heat <span class="amt">2 tbsp ghee</span>; <span class="amt">1 tsp cumin</span> + <span class="amt">1 pinch hing</span> 30 sec; <span class="amt">1 tbsp ginger</span> + <span class="amt">2 minced chilies</span> 1 min. Add <span class="amt">2 tbsp besan</span>, toast 2 min until nutty.</div></li>
+      <li class="r-kachori"><span class="tag">Kachori</span><div class="body"><span class="n">K3</span>Add the peas, <span class="amt">1 tsp coriander</span>, <span class="amt">1 tsp ground fennel</span>, <span class="amt">½ tsp cumin</span>, <span class="amt">½ tsp Kashmiri</span>, <span class="amt">¾ tsp salt</span>; cook 8–10 min until <b>dry</b>. Off heat: <span class="amt">¾ tsp amchur</span>, <span class="amt">½ tsp garam masala</span>, <span class="amt">¼ tsp sugar</span>, <span class="amt">2 tbsp cilantro</span>. Cool completely.</div></li>
+      <li class="r-samosa"><span class="tag">Samosa</span><div class="body"><span class="n">S5</span>Mix the seal paste: <span class="amt">3 tbsp flour</span> + <span class="amt">3 tbsp water</span> into a thick paste.</div></li>
+    </ol>
+  </div>
+
+  <!-- ~4:30 SHAPE -->
+  <div class="block">
+    <div class="blockhead"><span class="clock">~4:30</span><span class="label">Shape</span></div>
+    <p class="note">The long stretch. Fillings must be fully cool first.</p>
+    <ol class="steps">
+      <li class="r-dough"><span class="tag">Dough</span><div class="body"><span class="n">D4</span>Knead the rested dough briefly; split <b>¾ for samosas</b>, <b>¼ for kachori</b>.</div></li>
+      <li class="r-samosa"><span class="tag">Samosa</span><div class="body"><span class="n">S6</span>Roll a ball to a 6–7" oval, cut in half. Brush the edge with paste, fold a cone, fill <span class="amt">2–3 tbsp</span>, seal with no gaps. Keep <b>tonight's tray</b> out; freeze the rest shaped &amp; raw.</div></li>
+      <li class="r-kachori"><span class="tag">Kachori</span><div class="body"><span class="n">K4</span>Divide into ~15 balls; cup each into a 3" disc, fill <span class="amt">~1 tbsp</span>, pleat closed, flatten to a 2½–3" disc. Keep a few for tonight; refrigerate/freeze the rest.</div></li>
+    </ol>
+  </div>
+
+  <!-- ~7:30 SLOW FRY + PRE-COOKS -->
+  <div class="block">
+    <div class="blockhead"><span class="clock">~7:30</span><span class="label">Slow fry &amp; pre-cooks</span></div>
+    <p class="note">Get everything to a held state. Nothing here is finished — that's deliberate.</p>
+    <ol class="steps">
+      <li class="r-samosa"><span class="tag">Samosa</span><div class="body"><span class="n">S7</span>Heat oil to <span class="amt">275°F</span>. Slow-fry tonight's samosas <span class="amt">18–22 min</span> — barely bubbling, shell pale and blistered. Cool on a rack. <b>Do not finish.</b></div></li>
+      <li class="r-kachori"><span class="tag">Kachori</span><div class="body"><span class="n">K5</span>In the same <span class="amt">275°F</span> oil, slow-fry a few kachori <span class="amt">12–15 min</span> until pale and puffed. Cool on the rack alongside the samosas.</div></li>
+      <li class="r-rice"><span class="tag">Rice</span><div class="body"><span class="n">R1</span><span class="amt">~7:45</span> — Rinse <span class="amt">1½ cups basmati</span>; into the cooker with <span class="amt">2¼ cups water</span>, <span class="amt">1 tsp salt</span>, <span class="amt">1 bay leaf</span>. Start it, leave on warm. (Tadka comes later.)</div></li>
+      <li class="r-bhindi"><span class="tag">Bhindi</span><div class="body"><span class="n">B1</span><span class="amt">~8:00</span> — Slice the dried okra into <span class="amt">½"</span> rounds. Heat <span class="amt">3 tbsp oil</span>; <span class="amt">1 tsp cumin</span> + <span class="amt">pinch hing</span> 30 sec. Okra in a single layer — don't stir 3–4 min, then uncovered 12–15 min until browned. Add <span class="amt">1 sliced onion</span> + <span class="amt">2 chilies</span> 3–4 min; <span class="amt">½ tsp turmeric</span>, <span class="amt">1 tsp coriander</span>, <span class="amt">¾ tsp Kashmiri</span> 60 sec. <b>Stop here</b>, slightly underdone — hold the salt, amchur and finish.</div></li>
+      <li class="r-slushi"><span class="tag">Slushi</span><div class="body"><span class="n">SL1</span><span class="amt">~8:30 (or earlier)</span> — Load the cowboy colada and start the Ninja Slushi. It holds slush for hours, so an early start is fine and gives it room to catch.</div></li>
+    </ol>
+  </div>
+
+  <!-- DEPART -->
+  <div class="block">
+    <div class="blockhead"><span class="clock">8:45</span><span class="label">Airport</span></div>
+    <div class="depart"><b>Leave for JFK.</b> Oil off and covered, everything cooling or holding. ~25 min free-flow / ~11 mi — budget 35–40 with the curbside wait. Pickup ~9:30, home ~10:15.</div>
+  </div>
+
+  <!-- FINAL PUSH -->
+  <div class="block">
+    <div class="blockhead"><span class="clock">~10:15</span><span class="label">Final push · ~15 min</span></div>
+    <p class="note">One short burst. Everything lands hot together.</p>
+    <ol class="steps">
+      <li class="r-all"><span class="tag">Finish</span><div class="body"><span class="n">F1</span>Turn the fryer / oil up to <span class="amt">350°F</span>.</div></li>
+      <li class="r-bhindi"><span class="tag">Bhindi</span><div class="body"><span class="n">B2</span>While the oil heats: bhindi pan on high, re-crisp 4–5 min. Add <span class="amt">¾ tsp salt</span> + <span class="amt">¾ tsp amchur</span>; off heat finish with <span class="amt">¾ tsp garam masala</span>, juice of <span class="amt">½ lemon</span>, <span class="amt">2 tbsp cilantro</span>.</div></li>
+      <li class="r-rice"><span class="tag">Rice</span><div class="body"><span class="n">R2</span>Rice tadka: <span class="amt">2 tbsp ghee</span> + <span class="amt">1 tsp cumin</span>, then off heat <span class="amt">½ tsp garam masala</span> + <span class="amt">¼ tsp black pepper</span>. Pour over, pull the bay leaf, fluff, salt to taste.</div></li>
+      <li class="r-samosa"><span class="tag">Samosa</span><div class="body"><span class="n">S8</span>When the oil hits <span class="amt">350°F</span>: second-fry the par-fried samosas <span class="amt">2–3 min</span> to deep golden, drain on a rack.</div></li>
+      <li class="r-kachori"><span class="tag">Kachori</span><div class="body"><span class="n">K6</span>Finish the kachori in the same <span class="amt">350°F</span> pass, <span class="amt">2–3 min</span>, drain.</div></li>
+      <li class="r-slushi"><span class="tag">Slushi</span><div class="body"><span class="n">SL2</span>Pour the cowboy colada.</div></li>
+      <li class="r-all"><span class="tag">Finish</span><div class="body"><span class="n">F2</span>Plate everything with tamarind-mint chutney or yogurt. Eat.</div></li>
+    </ol>
+  </div>
+
+</main>
+
+<a href="#" class="totop" aria-label="Back to top">↑</a>
+<footer><a href="index.html">← Back to the full plan</a> · Steps cross-reference the recipe cards (S = samosa, K = kachori, R = rice, B = bhindi, D = dough).</footer>
+
+</body>
+</html>
